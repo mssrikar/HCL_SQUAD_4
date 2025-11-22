@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import DoctorDashboard from './pages/DoctorDashboard';
 import PatientDashboard from './pages/PatientDashboard';
 import { isAuthenticated } from './services/authService';
+import SeasonalDiseases from './pages/seasonalDiseases';
 
 // Protected Route Component
 const ProtectedRoute = ({ element }) => {
@@ -25,6 +26,7 @@ function App() {
           element={<ProtectedRoute element={<PatientDashboard />} />}
         />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/seasonalDiseases" element={<ProtectedRoute element={<SeasonalDiseases />}/>} />
       </Routes>
     </Router>
   );

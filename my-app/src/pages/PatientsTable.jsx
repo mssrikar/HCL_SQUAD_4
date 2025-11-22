@@ -1,25 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 
-function toCSV(rows, columns) {
-  const escape = (v) => {
-    if (v == null) return "";
-    const s = String(v).replace(/"/g, '""');
-    if (s.search(/("|,|\n)/g) >= 0) return `"${s}"`;
-    return s;
-  };
-  const header = columns.map((c) => escape(c.label)).join(",");
-  const lines = rows.map((r) =>
-    columns
-      .map((c) => {
-        const val = typeof c.selector === "function" ? c.selector(r) : r[c.key];
-        return escape(val);
-      })
-      .join(",")
-  );
-  return [header, ...lines].join("\n");
-}
-
 export default function PatientsTable({
   patients: patientsProp,
   fetchUrl,
@@ -35,12 +16,10 @@ export default function PatientsTable({
   const [sort, setSort] = useState({ key: "PatientName", direction: "asc" });
   const [selectedIds, setSelectedIds] = useState(new Set());
 
-  // keep in sync if prop changes
   useEffect(() => {
     if (Array.isArray(patientsProp)) setPatients(patientsProp);
   }, [patientsProp]);
 
-  // optionally fetch from backend
   useEffect(() => {
     if (!fetchUrl) return;
     let mounted = true;
@@ -151,17 +130,6 @@ export default function PatientsTable({
       else next.add(id);
       return next;
     });
-  }
-
-  function exportCSV() {
-    const csv = toCSV(sorted, columns);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `patients_export_${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
   }
 
   async function handleDelete(id) {

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUser, logout } from '../services/authService';
 import '../styles/DoctorDashboard.css';
 import PatientsTable from './PatientsTable';
+import SeasonalDiseases from './seasonalDiseases';
 
 const DoctorDashboard = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const DoctorDashboard = () => {
           <div className="card">
             <h3>Patients List</h3>
             <PatientsTable/>
+            <SeasonalDiseases/>
             </div>
         </div>
       </div>
