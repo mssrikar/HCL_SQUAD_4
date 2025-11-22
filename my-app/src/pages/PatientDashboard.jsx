@@ -27,14 +27,40 @@ const PatientDashboard = () => {
     setUser(storedUser);        // Reset values
     setIsEditing(false);
   };
-  const handleSubmit = () => {
-    localStorage.setItem("user", JSON.stringify(user)); // Save to storage
-    setIsEditing(false);
-    alert("Profile updated successfully!");
-  };
-const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+  
+const handleSubmit = () => {
+  // form validation
+  if (!user.username || user.username.trim() === "") {
+    alert("Name cannot be empty");
+    return;
+  }
+
+  if (!user.email || user.email.trim() === "") {
+    alert("Email cannot be empty");
+    return;
+  }
+
+  if (!user.email.includes("@")) {
+    alert("Enter a valid email address (must contain @)");
+    return;
+  }
+
+  if (!user.gender || user.gender.trim() === "") {
+    alert("Gender cannot be empty");
+    return;
+  }
+
+  if (!user.dob || user.dob.trim() === "") {
+    alert("Date of Birth is required");
+    return;
+  }
+
+  // if everything is valid → save the updated data
+  localStorage.setItem("user", JSON.stringify(user));
+  setIsEditing(false);
+  alert("Profile updated successfully!");
+};
+
 
   return (
     <div className="dashboard-container">
