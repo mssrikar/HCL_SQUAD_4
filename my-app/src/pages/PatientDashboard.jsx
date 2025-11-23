@@ -27,6 +27,10 @@ const PatientDashboard = () => {
     setUser(storedUser);        // Reset values
     setIsEditing(false);
   };
+  const handleChange = (e) => {
+  setUser({ ...user, [e.target.name]: e.target.value });
+};
+
   
 const handleSubmit = () => {
   // form validation

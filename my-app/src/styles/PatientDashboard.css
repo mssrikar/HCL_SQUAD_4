@@ -1,130 +1,232 @@
+/* ====== Layout ====== */
+
 .dashboard-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top left, #e3f2fd, #f9fbff 45%, #e8f5e9);
 }
 
-/* NAVBAR */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0059b3;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 6px;
-  margin-bottom: 25px;
+/* Center content */
+.dashboard-content {
+  max-width: 980px;
+  margin: 90px auto 40px auto;
+  padding: 0 16px;
 }
+
+/* ====== Navbar ====== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #1565c0, #42a5f5);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.navbar-brand h2 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user-greeting {
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* Logout button */
 
 .btn-logout {
-  background: #ff4d4d;
-  padding: 8px 14px;
-  border: none;
-  color: white;
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 13px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .btn-logout:hover {
-  background: #e04646;
+  background: #ff5252;
+  border-color: #ff5252;
 }
 
-/* DASHBOARD */
-.dashboard-content {
-  max-width: 700px;
-  margin: 0 auto;
+/* ====== Edit button at top ====== */
+
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-bottom: 18px;
+  background: #1e88e5;
+  color: #ffffff;
+  padding: 6px 18px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30, 136, 229, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
-/* SECTION CARD */
+.btn-edit::before {
+  content: "✏️";
+  font-size: 14px;
+}
+
+.btn-edit:hover {
+  background: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.45);
+}
+
+/* ====== Card Layout ====== */
+
 .section-card {
-  background: white;
-  padding: 20px;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  border: 1px solid #dcdcdc;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px 20px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(21, 101, 192, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(4px);
 }
 
 .section-card h2 {
-  margin-bottom: 12px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #1a237e;
 }
 
-/* INPUT FIELDS */
+/* Small subtitle or description (optional) */
+.section-subtitle {
+  font-size: 13px;
+  color: #607d8b;
+  margin-bottom: 8px;
+}
+
+/* ====== Form fields ====== */
+
 label {
-  font-weight: bold;
   display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #455a64;
   margin-top: 8px;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 input {
   width: 100%;
-  padding: 9px;
-  border: 1px solid #b8b8b8;
-  border-radius: 6px;
-  margin-bottom: 10px;
+  padding: 9px 10px;
   font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #cfd8dc;
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  background: #fdfdfd;
+}
+
+/* When enabled */
+input:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.2);
   background: #ffffff;
 }
 
-/* DISABLED FIELD LOOK */
+/* Disabled (read-only) look */
 input:disabled {
-  background: #e9ecef;
-  border: 1px solid #c0c0c0;
+  background: #f3f6f9;
+  border-color: #e0e0e0;
+  color: #607d8b;
   cursor: not-allowed;
 }
 
-/* EDIT BUTTON */
-.btn-edit {
-  display: block;
-  margin-left: auto;
-  background: #007bff;
-  padding: 8px 18px;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-bottom: 18px;
+/* Spacing between inputs */
+.section-card input + label {
+  margin-top: 10px;
 }
 
-.btn-edit:hover {
-  background: #0069d9;
-}
+/* ====== Buttons row (Cancel + Submit) ====== */
 
-/* BUTTON GROUP (CANCEL + SUBMIT) */
 .button-container {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 10px;
-  padding-bottom: 15px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-/* CANCEL BUTTON */
-.btn-cancel {
-  background: #6c757d;
+/* Common button styles */
+
+.btn-cancel,
+.btn-submit {
+  min-width: 90px;
   padding: 8px 16px;
+  border-radius: 999px;
   border: none;
-  color: white;
-  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Cancel button */
+
+.btn-cancel {
+  background: #eceff1;
+  color: #455a64;
 }
 
 .btn-cancel:hover {
-  background: #5c636a;
+  background: #cfd8dc;
 }
 
-/* SUBMIT BUTTON */
+/* Submit button */
+
 .btn-submit {
-  background: #28a745;
-  padding: 8px 18px;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+  background: #2e7d32;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(46, 125, 50, 0.35);
 }
 
 .btn-submit:hover {
-  background: #218838;
+  background: #1b5e20;
+  box-shadow: 0 4px 14px rgba(27, 94, 32, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ====== Responsive ====== */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 16px;
+  }
+
+  .dashboard-content {
+    margin-top: 80px;
+  }
+
+  .section-card {
+    padding: 16px 14px 18px 14px;
+  }
 }
